@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<workflow label="partner_approve_workflow" tasktype="workflow" tasktag="com.asiainfo.crm.channel.commission.vm.partner_approve_workflow">
+  <vars name="_TASK_JUGE_RESULT" datatype="java.lang.String" inouttype="inner" description="判断节点结果"/>
+  <vars name="DEAL_OBJECT_ID" datatype="java.lang.String" inouttype="in"/>
+  <vars name="DEAL_OBJECT_NAME" datatype="java.lang.String" inouttype="in"/>
+  <vars name="DEAL_OBJECT_TYPE" datatype="java.lang.String" inouttype="in"/>
+  <vars name="SUBMIT_ORG_ID" datatype="java.lang.String" inouttype="in"/>
+  <vars name="SUBMIT_STAFF_ID" datatype="java.lang.String" inouttype="in"/>
+  <vars name="IS_APPROVE" datatype="java.lang.String" inouttype="in"/>
+  <vars name="BUSINESS_ID" datatype="java.lang.String" inouttype="in"/>
+  <vars name="DEAL_OBJECT_EXT" datatype="java.lang.String" inouttype="in"/>
+  <task id="1" label="start" tasktype="start" isstart="true">
+    <uiinfo>56,134,32,32</uiinfo>
+    <gotoitem goto="26"/>
+    <autodeal>
+      <runtype>service</runtype>
+      <servicename/>
+      <runclassname/>
+      <runfunctionname/>
+    </autodeal>
+  </task>
+  <task id="15" label="end" tasktype="finish">
+    <uiinfo>441,134,32,32</uiinfo>
+    <autodeal>
+      <runtype/>
+      <servicename/>
+      <runclassname/>
+      <runfunctionname/>
+    </autodeal>
+  </task>
+  <task id="26" label="submit " tasktype="auto" tasktag="submit">
+    <uiinfo>149,134,32,32</uiinfo>
+    <gotoitem goto="27"/>
+    <autodeal>
+      <runtype/>
+      <servicename/>
+      <runclassname/>
+      <runfunctionname/>
+    </autodeal>
+  </task>
+  <task id="27" label="approve   " tasktype="user" tasktag="approve">
+    <uiinfo>244,134,32,32</uiinfo>
+    <gotoitem goto="32"/>
+    <autodeal>
+      <runtype>service</runtype>
+      <servicename>com.asiainfo.crm.partner.info.service.interfaces.IChlTaskDealSV</servicename>
+      <runclassname>com.asiainfo.crm.partner.info.service.impl.ChlTaskDealSVImpl</runclassname>
+      <runfunctionname>createTask</runfunctionname>
+      <vars name="P_0" datatype="java.lang.String" contextvarName="$TASK_ID" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_1" datatype="java.lang.String" contextvarName="$WORKFLOW_ID" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_2" datatype="java.lang.String" contextvarName="DEAL_OBJECT_ID" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_3" datatype="java.lang.String" contextvarName="DEAL_OBJECT_NAME" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_4" datatype="java.lang.String" contextvarName="DEAL_OBJECT_TYPE" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_5" datatype="java.lang.String" contextvarName="" defaultvalue="1" inouttype="in" description=""/>
+      <vars name="P_6" datatype="java.lang.String" contextvarName="" defaultvalue="1" inouttype="in" description=""/>
+      <vars name="P_7" datatype="java.lang.String" contextvarName="SUBMIT_ORG_ID" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_8" datatype="java.lang.String" contextvarName="" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_9" datatype="java.lang.String" contextvarName="" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_10" datatype="java.lang.String" contextvarName="" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_11" datatype="java.lang.String" contextvarName="BUSINESS_ID" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_12" datatype="java.lang.String" contextvarName="DEAL_OBJECT_EXT" defaultvalue="" inouttype="in" description=""/>
+      <vars name="return" datatype="void" contextvarName="" defaultvalue="" inouttype="return" description=""/>
+    </autodeal>
+    <user taskusertype="staff" organizeid="10001" taskuserid="10001"/>
+  </task>
+  <task id="30" label="second modify   " tasktype="user" tasktag="second_modify">
+    <uiinfo>335,46,32,32</uiinfo>
+    <gotoitem condition="SUBMIT" goto="27"/>
+    <gotoitem condition="DELETE" goto="15"/>
+    <autodeal>
+      <runtype>service</runtype>
+      <servicename>com.asiainfo.crm.partner.info.service.interfaces.IChlTaskDealSV</servicename>
+      <runclassname>com.asiainfo.crm.partner.info.service.impl.ChlTaskDealSVImpl</runclassname>
+      <runfunctionname>createTask</runfunctionname>
+      <vars name="P_0" datatype="java.lang.String" contextvarName="$TASK_ID" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_1" datatype="java.lang.String" contextvarName="$WORKFLOW_ID" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_2" datatype="java.lang.String" contextvarName="DEAL_OBJECT_ID" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_3" datatype="java.lang.String" contextvarName="DEAL_OBJECT_NAME" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_4" datatype="java.lang.String" contextvarName="DEAL_OBJECT_TYPE" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_5" datatype="java.lang.String" contextvarName="" defaultvalue="2" inouttype="in" description=""/>
+      <vars name="P_6" datatype="java.lang.String" contextvarName="" defaultvalue="2" inouttype="in" description=""/>
+      <vars name="P_7" datatype="java.lang.String" contextvarName="SUBMIT_ORG_ID" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_8" datatype="java.lang.String" contextvarName="SUBMIT_STAFF_ID" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_9" datatype="java.lang.String" contextvarName="" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_10" datatype="java.lang.String" contextvarName="" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_11" datatype="java.lang.String" contextvarName="BUSINESS_ID" defaultvalue="" inouttype="in" description=""/>
+      <vars name="P_12" datatype="java.lang.String" contextvarName="DEAL_OBJECT_EXT" defaultvalue="" inouttype="in" description=""/>
+      <vars name="return" datatype="void" contextvarName="" defaultvalue="" inouttype="return" description=""/>
+    </autodeal>
+    <user taskusertype="staff" organizeid="10001" taskuserid="10001"/>
+  </task>
+  <task id="32" label="is_approve " tasktype="decision">
+    <uiinfo>334,134,32,32</uiinfo>
+    <gotoitem condition="YES" goto="15"/>
+    <gotoitem condition="NO" goto="30"/>
+    <condition>:IS_APPROVE</condition>
+  </task>
+  <join taska="1" taskb="26">
+    <uiinfo>10.0,10.0,500,500,72,150,149,150</uiinfo>
+  </join>
+  <join taska="26" taskb="27">
+    <uiinfo>10.0,10.0,500,500,165,150,244,150</uiinfo>
+  </join>
+  <join label="SUBMIT" taska="30" taskb="27" isagainst="true">
+    <condition>SUBMIT</condition>
+    <uiinfo>10.0,10.0,500,500,351,62,260,62,260,134</uiinfo>
+  </join>
+  <join label="DELETE" taska="30" taskb="15">
+    <condition>DELETE</condition>
+    <uiinfo>10.0,10.0,500,500,351,62,456,62,457,134</uiinfo>
+  </join>
+  <join taska="27" taskb="32">
+    <uiinfo>10.0,10.0,500,500,260,150,334,150</uiinfo>
+  </join>
+  <join label="YES" taska="32" taskb="15">
+    <condition>YES</condition>
+    <uiinfo>10.0,10.0,500,500,350,150,441,150</uiinfo>
+  </join>
+  <join label="NO" taska="32" taskb="30">
+    <condition>NO</condition>
+    <uiinfo>10.0,10.0,500,500,350,150,351,78</uiinfo>
+  </join>
+</workflow>

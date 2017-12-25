@@ -1,0 +1,70 @@
+<!DOCTYPE project [
+		<!ELEMENT project (property|path|target)*>
+		<!ATTLIST project
+				name CDATA #REQUIRED
+				basedir CDATA #REQUIRED
+				default CDATA #REQUIRED>
+		<!ELEMENT property (#PCDATA)>
+		<!ATTLIST property
+				name CDATA #REQUIRED
+				location CDATA #REQUIRED>
+		<!ELEMENT path (fileset)*>
+		<!ATTLIST path
+				id CDATA #IMPLIED
+				refid CDATA #IMPLIED>
+		<!ELEMENT fileset (include)*>
+		<!ATTLIST fileset
+				dir CDATA #REQUIRED>
+		<!ELEMENT include (#PCDATA)>
+		<!ATTLIST include
+				name CDATA #REQUIRED>
+		<!ELEMENT target (java)*>
+		<!ATTLIST target
+				name CDATA #REQUIRED>
+		<!ELEMENT java (arg|classpath)*>
+		<!ATTLIST java
+				classname CDATA #REQUIRED
+				fork CDATA #REQUIRED>
+		<!ELEMENT arg (#PCDATA)>
+		<!ATTLIST arg
+				value CDATA #REQUIRED>
+		<!ELEMENT classpath (path)*>
+		]>
+<project name="wsdl2java" basedir="D:/javaSoft/workSapce/WebSerivceDemo-CXFSpring/testWSClientByCXFWithSpring/src/com" default="ServiceGen">
+	<property name="cxf2.5.2_lib.dir" location="D:\javaSoft\workSapce\WebSerivceDemo-CXFSpring\testWSClientByCXFWithSpring\WebContent\WEB-INF\lib" />
+	<!--C:/cxf/A_CR/cms/src/com/asiainfo/um/adapter/cms/wsdl2Java-->
+	<path id="master-classpath">
+		<fileset dir="${cxf2.5.2_lib.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	<target name="ServiceGen">
+		<java classname="org.apache.cxf.tools.wsdlto.WSDLToJava" fork="true">
+			<arg value="-ant" />
+			<arg value="-impl" />
+			<arg value="-all" />
+			<!--<arg value="-p"/>
+			<arg value="http://com.ztesoft.zsmart/service=service"/>
+			<arg value="-p"/>
+			<arg value="xsd"/>-->	
+			<!--<arg value="-p"/>
+			<arg value="consentloanapplication"/>-->
+			<!-- jaxb schema binding
+			<arg value="-b" />
+			<arg value="tools/wsdlCustomize.xml" />
+			<arg value="-b" />
+			<arg value="tools/schema.xml" />
+			-->
+			<!-- <arg value="src/com/asiainfo/um/adapter2/forintr/webservice/wsdl/Resource4OpenCode/Resource4Opencode.wsdl" /> -->
+			<!--<arg value="C:\cxf\A_CR\cms\src\com\asiainfo\um\adapter\cms\java2Wsdl\HelloWordService.wsdl" />
+			
+			C:\cxf\A_CR\cms\config\wsdl\cdm\wsdl\notifications\UsometNotifications_v1.0.wsdl-->
+			<arg value="D:/javaSoft/workSapce/WebSerivceDemo-CXFSpring/testWSServerByCXFWithSpring/src/com/IHelloServicesService.wsdl" />
+						
+			<classpath>
+				<path refid="master-classpath" />
+			</classpath>
+		</java>
+	</target>
+	
+</project>
